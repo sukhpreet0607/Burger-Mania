@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: whitesmoke;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        #navbarImage {
+            display: inline-block;
+            border-radius: 35%;
+            height: 5rem;
+            margin-left: 30rem;
+        }
+
+        #div1,#div2,#div3,#div4,#div5,#div6{
+            border-style: solid;
+            border-radius: 2%;
+            height: 10rem;
+            width: 80rem;
+            margin: auto;
+            margin-bottom: 15px;
+            text-align: center;
+            background-color: wheat;
+        }
+
+        #burgers{
+            height: 100%;
+            float: left;
+            width: 20%;
+        }
+
+        .burgerName{
+            float: left;
+            font-size: larger;
+            padding-left: 10px;
+            padding-top: 15px;   
+        }
+
+        .burgerDesc{
+            float: left;
+            padding-left: 10px;
+            font-style: italic;
+        }
+
+        select {
+            display: inline-block;
+            position: relative;
+            bottom: 8px;
+            width: 15%;
+            height: 20%;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #9ecaed;
+            box-shadow: 0 0 10px #9ecaed;
+        }
+
+        .add{
+            display: inline-block;
+            position: relative;
+            bottom: 8px;
+            width: 10%;
+            margin-left: 35px;
+            background-color: lightgreen;
+            border-style: dotted;
+            font-size: medium;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            display: block;
+        }
+    </style>
+
+    <title>Burger Mania</title>
+</head>
+
+<body>
+
+    <!-- Navabar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <img src="../Assets/images.png" id="navbarImage" alt="Burger Mania logo">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="./cart.html">Cart</a></li>
+                <li><a href="#">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main section -->
+    <main>
+
+        <!-- Grid of burgers  -->
+        <div id="section">
+            <div id="div1">
+                <img src="../Assets/burger1.jfif" id="burgers" alt="Supreme bug">
+                <span class="burgerName">Supreme Burger</span>
+                <br/>
+                <br/>
+                <span class="burgerDesc">big pattie, lettuce, tomato</span>
+                <select name="Supreme bug" id="categories">
+                    <option value="Veg">Veg</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                </select>
+                <button class="add" onclick="addToCart('div1')">+ Add</button>
+            </div>
+            <div id="div2">
+                <img src="../Assets/burger2.jfif" id="burgers" alt="Mexican bite">
+                <span class="burgerName">Mexican bite</span>
+                <br/>
+                <br/>
+                <span class="burgerDesc">spicy pattie, olives, onion</span>
+                <select name="categories" id="categories">
+                    <option value="Veg">Veg</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                </select>
+                <button class="add" onclick="addToCart('div2')">+ Add</button>
+            </div>
+            <div id="div3">
+                <img src="../Assets/burger3.jfif" id="burgers" alt="Tandoor grill">
+                <span class="burgerName">Tandoor grill</span>
+                <br/>
+                <br/>
+                <span class="burgerDesc">grill pattie, lettuce, pickle</span>
+                <select name="categories" id="categories">
+                    <option value="Veg">Veg</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                </select>
+                <button class="add" onclick="addToCart('div3')">+ Add</button>
+            </div>
+            <div id="div4">
+                <img src="../Assets/burger4.jfif" id="burgers" alt="Mania special">
+                <span class="burgerName">Mania special</span>
+                <br/>
+                <br/>
+                <span class="burgerDesc">double pattie, cabbage, latino mayo</span>
+                <select name="categories" id="categories">
+                    <option value="Veg">Veg</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                </select>
+                <button class="add" onclick="addToCart('div4')">+ Add</button>
+            </div>
+            <div id="div5">
+                <img src="../Assets/burger5.jfif" id="burgers" alt="Super cheesy">
+                <span class="burgerName">Super cheesy</span>
+                <br/>
+                <br/>
+                <span class="burgerDesc">crispy pattie, cheese, tomato</span>
+                <select name="categories" id="categories">
+                    <option value="Veg">Veg</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Chicken">Chicken</option>
+                </select>
+                <button class="add" onclick="addToCart('div5')">+ Add</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>This franchise belongs to Sukhpreet pvt.ltd@2024</p>
+    </footer>
+
+    <script src="../Script/add.js"></script>
+</body>
+
+</html>

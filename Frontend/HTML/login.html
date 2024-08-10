@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            background-image: url("../Assets/images.png");
+            /* /* background-repeat: no-repeat; */
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed; 
+            width: 100wh;
+            overflow: hidden;
+        }
+
+
+        h1 {
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 4vw;
+            color: wheat;
+        }
+
+        main {
+            position: relative;
+            text-align: center;
+            top: 75%;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 100%;
+            color: wheat;
+        }
+
+        #submit{
+            background-color: lightblue;
+            color: darkred;
+        }
+
+        #mobNumber {
+            padding-left: 10px;
+            padding-right: 10px;
+            background-color: whitesmoke;
+            color: black;
+            border-style: solid;
+            border-radius:5%;
+        }
+    </style>
+    <title>Burger Mania</title>
+</head>
+
+<body>
+        <header>
+            <h1>Welcome to Burger Mania</h1>
+        </header>
+        <main >
+            <form id="loginForm" class=".form-inline" action="" novalidate>
+                <div class="form-group" style="display: flex; flex-direction: row ; align-items: center; justify-content: center; gap: 10px;">
+                    <label for="mobNumber">Enter your number</label>
+                    <input type="text" name="mobNumber" id="mobNumber" minlength="10" maxlength="10" required>
+                    <input type="submit" id="submit" name="submit" class="btn btn-default" value="Login">
+                </div>
+            </form>
+        </main>
+
+
+    <script src="../Script/login.js"></script>
+
+</body>
+
+</html>
