@@ -1,6 +1,5 @@
 ﻿using BurgerManiaServer.Data;
 using BurgerManiaServer.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -9,7 +8,7 @@ namespace BurgerManiaServer.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         private readonly BurgerManiaContext _context;
 
@@ -18,14 +17,14 @@ namespace BurgerManiaServer.Controllers
             _context = context;
         }
 
-        // GET: api/UserController
+        // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Index()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // POST: api/UserController/AddUser
+        // POST: api/User/AddUser
         [HttpPost("AddUser")]
         public async Task<ActionResult<User>> AddUser(User user)
         {
@@ -41,8 +40,9 @@ namespace BurgerManiaServer.Controllers
             return CreatedAtAction("AddUser", new { id = user.UserId }, user);
         }
 
+        // GET: api/User/GetUserById
         [HttpGet("GetUserById")]
-        public async Task<ActionResult<User>> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
             try
             {
@@ -59,8 +59,9 @@ namespace BurgerManiaServer.Controllers
             }
         }
 
+        // PUT: api/User/UpdateUserById
         [HttpPut("UpdateUserById")]
-        public async Task<ActionResult<User>> UpdateUserById(int id,User updatedUser)
+        public async Task<IActionResult> UpdateUserById(int id,User updatedUser)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace BurgerManiaServer.Controllers
                     _context.Users.Entry(user).State = EntityState.Detached;
                     _context.Users.Entry(updatedUser).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    return updatedUser;
+                    return Ok(updatedUser);
                 }
                 else
                 {
@@ -83,8 +84,9 @@ namespace BurgerManiaServer.Controllers
             }
         }
 
-        [HttpDelete("RemoveUser")]
-        public async Task<ActionResult> RemoveUser(int id)
+        // DEL: api/User/RemoveUserById
+        [HttpDelete("RemoveUserById")]
+        public async Task<IActionResult> RemoveUserById(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user != null)
