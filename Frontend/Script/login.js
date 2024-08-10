@@ -2,15 +2,22 @@ const form = document.getElementById('loginForm');
 
 form.onsubmit = (evt) => {
     evt.preventDefault();
-    var isFormValid = true;
 
-    var mobNumber = form.mobNumber;
-    // console.log(mobNumber);
+    var isFormValid = true;
+    var username = form.username;
+    var password = form.password;
     
-    if (!mobNumber.checkValidity()) {
-        if (mobNumber.innerText.length != 10) {
+    if (!username.checkValidity()) {
+        if (username.innerText.length<8) {
             isFormValid = false;
-            alert('Please enter valid a 10 digit number');
+            alert('Please enter a valid username');
+        }
+    }
+
+    if (!password.checkValidity()) {
+        if (password.innerText.length<8) {
+            isFormValid = false;
+            alert('Please enter correct password');
         }
     }
 

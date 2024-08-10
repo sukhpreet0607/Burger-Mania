@@ -50,7 +50,16 @@
             color: darkred;
         }
 
-        #mobNumber {
+        #username {
+            padding-left: 10px;
+            padding-right: 10px;
+            background-color: whitesmoke;
+            color: black;
+            border-style: solid;
+            border-radius:5%;
+        }
+
+        #password {
             padding-left: 10px;
             padding-right: 10px;
             background-color: whitesmoke;
@@ -69,8 +78,12 @@
         <main >
             <form id="loginForm" class=".form-inline" action="" novalidate>
                 <div class="form-group" style="display: flex; flex-direction: row ; align-items: center; justify-content: center; gap: 10px;">
-                    <label for="mobNumber">Enter your number</label>
-                    <input type="text" name="mobNumber" id="mobNumber" minlength="10" maxlength="10" required>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" minlength="6" maxlength="20" required>
+
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" minlength="8" maxlength="20" required>
+
                     <input type="submit" id="submit" name="submit" class="btn btn-default" value="Login">
                 </div>
             </form>
