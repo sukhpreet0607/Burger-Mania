@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BurgerManiaServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fae6d17c91e96599bbad7e798d932ff333d6e6ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70bd6eb76372c697ccacbabad0b4f58cc2d71c5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BurgerManiaServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BurgerManiaServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
