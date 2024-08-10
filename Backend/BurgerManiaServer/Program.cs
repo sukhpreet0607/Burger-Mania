@@ -10,12 +10,9 @@ namespace BurgerManiaServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<BurgerManiaContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("BurgerCartContext") ?? throw new InvalidOperationException("Connection string 'BurgerCartContext' not found.")));
 
-            // Add services to the container.
-            //builder.Services.AddDbContext<BurgerCartContext>
-            //    (opt => );
+            builder.Services.AddDbContext<BurgerManiaContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BurgerManiaContext") ?? throw new InvalidOperationException("Connection string 'BurgerManiaContext' not found.")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
