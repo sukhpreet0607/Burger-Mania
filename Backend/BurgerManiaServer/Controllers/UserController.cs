@@ -2,6 +2,7 @@
 using BurgerManiaServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data.Common;
 
 namespace BurgerManiaServer.Controllers
@@ -40,13 +41,14 @@ namespace BurgerManiaServer.Controllers
             return CreatedAtAction("AddUser", new { id = user.UserId }, user);
         }
 
-        // GET: api/User/GetUserById
-        [HttpGet("GetUserById")]
-        public async Task<IActionResult> GetUserById(int id)
+        // GET: api/User/GetUser
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser(string username, string password)
         {
             try
             {
-                var user = await _context.Users.FindAsync(id);
+                var user = await _context.Users.
+                    FirstOrDefaultAsync(u => u.UserName == username && u.UserPassword == password);
                 if (user==null)
                 {
                     return NotFound();
