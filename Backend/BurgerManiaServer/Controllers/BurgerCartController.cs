@@ -14,9 +14,9 @@ namespace BurgerManiaServer.Controllers
     [ApiController]
     public class BurgerCartController : ControllerBase
     {
-        private readonly BurgerCartContext _context;
+        private readonly BurgerManiaContext _context;
 
-        public BurgerCartController(BurgerCartContext context)
+        public BurgerCartController(BurgerManiaContext context)
         {
             _context = context;
         }

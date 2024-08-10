@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BurgerManiaServer.Models
 {
-    [Table("User")]
+    [Table("Users")]
     public class User
     {
         [Key]

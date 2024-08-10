@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BurgerManiaServer.Models
 {
     [Table("Orders")]
-    public class Orders
+    public class Order
     {
         [Key]
         public int ItemId { get; set; }

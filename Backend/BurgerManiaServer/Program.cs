@@ -10,7 +10,7 @@ namespace BurgerManiaServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<BurgerCartContext>(options =>
+            builder.Services.AddDbContext<BurgerManiaContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BurgerCartContext") ?? throw new InvalidOperationException("Connection string 'BurgerCartContext' not found.")));
 
             // Add services to the container.
