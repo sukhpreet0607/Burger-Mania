@@ -42,7 +42,6 @@ namespace BurgerManiaServer.Controllers
         }
 
         // GET: api/User/GetUser
-        //GetUser?username={username}&password={password}
         [HttpGet("GetUser/{username}/{password}")]
         public async Task<IActionResult> GetUser(string username, string password)
         {

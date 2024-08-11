@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BurgerManiaServer.Data;
 using BurgerManiaServer.Models;
 using System.Data.Common;
+using BurgerManiaServer.Utilities;
 
 namespace BurgerManiaServer.Controllers
 {
@@ -80,24 +81,30 @@ namespace BurgerManiaServer.Controllers
             return CreatedAtAction("AddOrder", new { id = Order.ItemId }, Order);
         }
 
-        // PUT: api/Order/burger/category
-        [HttpPut("{burger}/{category}")]
-        public async Task<ActionResult> UpdateOrder(string burger, string category, Order updatedItem)
+        // PUT: api/Order/UpdateOrder
+        [HttpPut("UpdateOrder")]
+        public async Task<IActionResult> UpdateOrder(UpdateOrderParam updateOrderParam)
         {
             try
             {
+                string burger = updateOrderParam.Burger;
+                string category = updateOrderParam.Category;
+                Order UpdatedItem = updateOrderParam.UpdatedItem; ;
+
                 var item = await _context.Orders.FirstOrDefaultAsync(
-                    item => item.Burger==burger && item.Category==category);
+                    item => item.Burger == burger && item.Category == category && item.UserId == UpdatedItem.UserId && !item.IsCheckout);
                 if (item != null)
                 {
-                    updatedItem.TotalPrice = updatedItem.Price * updatedItem.Quantity;
+                    Console.WriteLine("Into the if of if ");
+                    UpdatedItem.TotalPrice = UpdatedItem.Price * UpdatedItem.Quantity;
                     _context.Orders.Entry(item).State = EntityState.Detached;
-                    _context.Orders.Entry(updatedItem).State = EntityState.Modified;
+                    _context.Orders.Entry(UpdatedItem).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    return Ok(updatedItem);
+                    return Ok(UpdatedItem);
                 }
                 else
                 {
+                    Console.WriteLine("Into the else of else ");
                     return NotFound();
                 }
                 
@@ -109,17 +116,18 @@ namespace BurgerManiaServer.Controllers
         }
 
 
-        // DELETE: api/Order/burger/category
-        [HttpDelete("{burger}/{category}")]
-        public async Task<IActionResult> RemoveOrder(string burger, string category)
+        // DELETE: api/Order/RemoveOrder
+        [HttpDelete("RemoveOrder")]
+        public async Task<IActionResult> RemoveOrder(RemoveOrderParam removeOrderParam)
         {
+            Console.WriteLine("Delete api call params: ",removeOrderParam);
             var item = await _context.Orders
-                .FirstOrDefaultAsync(item => item.Burger == burger && item.Category == category);
+                .FirstOrDefaultAsync(item => item.Burger == removeOrderParam.Burger && item.Category == removeOrderParam.Category && item.UserId == removeOrderParam.UserId && item.IsCheckout==false);
             if (item == null)
             {
                 return NotFound();
             }
-
+            
             _context.Orders.Remove(item);
             await _context.SaveChangesAsync();
             return Ok();

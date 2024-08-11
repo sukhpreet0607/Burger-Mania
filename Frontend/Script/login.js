@@ -9,19 +9,17 @@ form.onsubmit = async (evt) => {
     const username = form.username.value;
     const password = form.password.value;
 
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
 
-    if (username.length < 8) {
+    if (username.length < 5) {
         isFormValid = false;
         alert('Please enter a valid username');
     }
 
-
-
     if (password.length < 5) {
         isFormValid = false;
-        alert('Please enter correct password');
+        alert('Please enter a valid password');
     }
 
 
@@ -37,14 +35,15 @@ form.onsubmit = async (evt) => {
             );
 
             if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
+                alert('User not found');
             }
-
-            const userData = await response.json();
-            console.log(userData);
-            localStorage.setItem("userId", `${userData.userId}`);
-            alert('You are successfully login to Burger Mania');
-            window.location.href = '../HTML/home.html';
+            else {
+                const userData = await response.json();
+                console.log(userData);
+                localStorage.setItem("userId", `${userData.userId}`);
+                alert('You are successfully login to Burger Mania');
+                window.location.href = '../HTML/home.html';
+            }
         }
         catch (error) {
             throw error;
