@@ -51,14 +51,14 @@ async function display() {
 
 async function removeFromCart(burger, category) {
     try {
-        const response = await fetch(URL + `/${burger}/${category}`, {
+        const response = await fetch(URL + "/RemoveOrder", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"userId":localStorage.getItem("userId")})
+            body: JSON.stringify({"Burger":burger,"Category": category, "UserId": localStorage.getItem("userId")})
         });
-        // location.reload();
+        location.reload();
         return response;
     } catch (error) {
         console.log("Error in removing an item from the cart: ", error);
@@ -87,15 +87,17 @@ async function placeOrder() {
         const myOrders = await response.json();
 
         for (let item in myOrders) {
-            if (myOrders[item].userId == localStorage.getItem("userId")) {
+            if (myOrders[item].userId == localStorage.getItem("userId") && myOrders[item].isCheckout==false) {
                 const updatedItem = myOrders[item];
                 updatedItem.isCheckout = true;
-                await fetch(URL + `/${myOrders[item].burger}/${myOrders[item].category}`, {
+                console.log({"Burger":myOrders[item].burger, "Category":myOrders[item].category, "UpdatedItem":updatedItem});
+
+                const res = await fetch(URL + "/UpdateOrder", {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(updatedItem)
+                    body: JSON.stringify({"Burger":myOrders[item].burger, "Category":myOrders[item].category, "UpdatedItem":updatedItem})
                 })
             }
         }

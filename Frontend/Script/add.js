@@ -18,7 +18,7 @@ async function addToCart(divId) {
         // console.log(myOrders);
 
         for (let item in myOrders) {
-            if (myOrders[item].userId==localStorage.getItem("userId") && myOrders[item].burger == burger && myOrders[item].category == category && !myOrders[item].isCheckout) {
+            if (myOrders[item].userId == localStorage.getItem("userId") && myOrders[item].burger == burger && myOrders[item].category == category && !myOrders[item].isCheckout) {
                 const updatedItem = {
                     "itemId": myOrders[item].itemId,
                     "burger": myOrders[item].burger,
@@ -29,12 +29,12 @@ async function addToCart(divId) {
                     "userId": localStorage.getItem("userId"),
                     "isCheckout": myOrders[item].isCheckout
                 };
-                const response = await fetch(URL + `/${burger}/${category}`, {
+                const response = await fetch(URL + "/UpdateOrder", {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(updatedItem)
+                    body: JSON.stringify({ "Burger": myOrders[item].burger, "Category": myOrders[item].category, "UpdatedItem": updatedItem })
                 })
                 return response;
             }
