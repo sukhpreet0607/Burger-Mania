@@ -1,10 +1,4 @@
-const URL = "https://localhost:7219/api/BurgerCart";
-
-// if (!localStorage.getItem('myCart')) {
-//     const myCart = [];
-//     localStorage.setItem('myCart', JSON.stringify(myCart));
-// }
-
+const URL = "https://localhost:7219/api/Order";
 
 async function addToCart(divId) {
     var div = document.getElementById(divId);
@@ -14,34 +8,34 @@ async function addToCart(divId) {
     var category = selectElement.options[selectElement.selectedIndex].value;
     // console.log(category);
     // console.log(burger);
-    // const myCart = JSON.parse(localStorage.getItem('myCart'));
 
     try {
         const response = await fetch(URL);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        const myCart = await response.json();
-        console.log(myCart);
+        const myOrders = await response.json();
+        // console.log(myOrders);
 
-        for (let item in myCart) {
-            if (myCart[item].burger == burger && myCart[item].category == category) {
+        for (let item in myOrders) {
+            if (myOrders[item].userId==localStorage.getItem("userId") && myOrders[item].burger == burger && myOrders[item].category == category && !myOrders[item].isCheckout) {
                 const updatedItem = {
-                    "itemId": myCart[item].itemId,
-                    "burger": myCart[item].burger,
-                    "category": myCart[item].category,
-                    "price": myCart[item].price,
-                    "quantity": myCart[item].quantity + 1,
-                    "totalPrice": myCart[item].totalPrice
+                    "itemId": myOrders[item].itemId,
+                    "burger": myOrders[item].burger,
+                    "category": myOrders[item].category,
+                    "price": myOrders[item].price,
+                    "quantity": myOrders[item].quantity + 1,
+                    "totalPrice": myOrders[item].totalPrice,
+                    "userId": localStorage.getItem("userId"),
+                    "isCheckout": myOrders[item].isCheckout
                 };
                 const response = await fetch(URL + `/${burger}/${category}`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json' 
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(updatedItem)
                 })
-
                 return response;
             }
         }
@@ -50,11 +44,13 @@ async function addToCart(divId) {
             "burger": burger,
             "category": category,
             "quantity": 1,
+            "userId": localStorage.getItem("userId"),
+            "isCheckout": false
         };
-        const res = await fetch(URL, {
+        const res = await fetch(URL + "/AddOrder", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(newItem)
         });
@@ -63,39 +59,7 @@ async function addToCart(divId) {
 
     }
     catch (error) {
-        console.log("Error encountered while accessing cart : ", error);
-    }
-
-
-
-    // localStorage.setItem('myCart', JSON.stringify(myCart));
-    // console.log(localStorage.getItem('myCart'));
-    // for (let item in myCart) {
-    //     console.log(myCart[item].name + ' ' + myCart[item].category + ':' + myCart[item].totalPrice);
-    // }
-
-}
-
-
-function Burger(name, category) {
-    this.name = name;
-    this.category = category;
-    this.quantity = 1;
-    this.price = 0;
-    this.totalPrice = 0;
-
-    if (this.category === 'Veg') {
-        this.price = 100;
-    }
-    else if (this.category === 'Egg') {
-        this.price = 150;
-    }
-    else {
-        this.price = 200;
-    }
-
-    this.calculatePrice = () => {
-        this.totalPrice = this.quantity * this.price;
+        console.log("Error encountered while accessing Database : ", error);
     }
 
 }

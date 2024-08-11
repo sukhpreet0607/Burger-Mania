@@ -87,7 +87,7 @@ namespace BurgerManiaServer.Controllers
             try
             {
                 var item = await _context.Orders.FirstOrDefaultAsync(
-                    item => item.Burger==burger && item.Category==category);
+                    item => item.Burger==burger && item.Category==category && item.UserId == updatedItem.UserId && !updatedItem.IsCheckout);
                 if (item != null)
                 {
                     updatedItem.TotalPrice = updatedItem.Price * updatedItem.Quantity;
@@ -111,15 +111,16 @@ namespace BurgerManiaServer.Controllers
 
         // DELETE: api/Order/burger/category
         [HttpDelete("{burger}/{category}")]
-        public async Task<IActionResult> RemoveOrder(string burger, string category)
+        public async Task<IActionResult> RemoveOrder(string burger, string category, int userId)
         {
+            Console.WriteLine("Delete api call params: ",burger,category, userId);
             var item = await _context.Orders
                 .FirstOrDefaultAsync(item => item.Burger == burger && item.Category == category);
             if (item == null)
             {
                 return NotFound();
             }
-
+            
             _context.Orders.Remove(item);
             await _context.SaveChangesAsync();
             return Ok();
